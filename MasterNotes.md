@@ -1,4 +1,4 @@
-# Workflow details for the *Aedes albopictus* biting miRNA analysis
+# Workflow details for the *Aedes albopictus* autogenous vs. anautogenous miRNA analysis
 
 ## Upstream 
 Information about sequence reads (raw read count, read alignment rate, etc.) for the data can be found [here](https://docs.google.com/spreadsheets/d/1uGxz6Iz_dW80iDmIz8P019yGQuOd1hK0S7qcz8FfFZY/edit?gid=0#gid=0)
@@ -25,15 +25,15 @@ Aim: to remove tRNA and other contaminates.
 
 All tRNAs and rRNAs features from the gff file for AalbF3 were collected and we made a subset fasta with those sequences as a "contaminants" file.
 
-We indexed this contaminants file using Bowtie2 (v2.4.4) with this [script](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Upstream/scripts/contaminants_index.sh).
+We indexed this contaminants file using Bowtie2 (v2.4.4) with this [script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/contaminants_index.sh).
 
-Ran alignment and put non-aligned reads into filtered fasta files using this [script](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Upstream/scripts/contaminants_align.sh).
+Ran alignment and put non-aligned reads into filtered fasta files using this [script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/contaminants_align.sh).
 
 The output files contain all the sequences that did NOT align with our contanminants file i.e. files with sequences that were not tRNAs or rRNAs (presumably mostly miRNAs are left).
 
 #### Size sorting
 
-We wanted to only keep reads that fell within 18 - 24 bases which is what we consider the size of miRNAs. This was done with a custom [python script](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Upstream/scripts/python_scripts/trimANDsizeSort.py) for all the files with this [script](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Upstream/scripts/sortSize_multi.sh).
+We wanted to only keep reads that fell within 18 - 24 bases which is what we consider the size of miRNAs. This was done with a custom [python script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/python_scripts/trimANDsizeSort.py) for all the files with this [script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/sortSize_multi.sh).
 
 ### miRDeep2 
 #### Index with Bowtie
