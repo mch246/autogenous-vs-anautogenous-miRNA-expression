@@ -40,21 +40,25 @@ We wanted to only keep reads that fell within 18 - 24 bases which is what we con
 
 Mapping was done using the *Aedes albopictus* reference genome (GCA_018104305.1) found on NCBI
 
-The genome was indexed for miRDeep2 using Bowtie (v1.3.1) with this [script](). Note, for miRDeep2 to run properly, there can be no whitespace in the headers of the reference genome fasta so I had to remove/replace the whitespaces before indexing.
+The genome was indexed for miRDeep2 using Bowtie (v1.3.1) with this [script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/genome_index.sh). Note, for miRDeep2 to run properly, there can be no whitespace in the headers of the reference genome fasta so I had to remove/replace the whitespaces before indexing.
 
 #### Run miRDeep2 to count reads for each miRNA
 
 miRDeep2 (miRDeep2.0.1.3) was installed and run in a conda virtual environment which was created following this [markdown](https://github.com/srmarzec/Culex_Biting_miRNA/blob/main/misc/Conda_VirtualEnvironment.md).
 
-miRDeep2 was [run](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Upstream/scripts/miRDeep2.sh) and we looked for novel miRNAs identified in our samples and added these to the input list of known miRNAs for sake of quantification (mapping reads to miRNAs).
+miRDeep2 was [run](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/miRdeep2.sh) and we looked for novel miRNAs identified in our samples and added these to the input list of known miRNAs for sake of quantification (mapping reads to miRNAs).
 
-We then mapped reads to the known miRNAs with this [script](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Upstream/scripts/quantifier_FULL.sh). This produced a count matrix we used for downstream analysis. 
+We then mapped reads to the known miRNAs with this [script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/upstream/scripts/quantifier.sh). This produced a count matrix we used for downstream analysis. 
 
 ## Downstream
 
 All downstream analysis done in R (v4.0.2)
 
 ### DESeq
-Using DESeq2 (v1.30.1) ([script](https://github.com/srmarzec/albopictus_biting_miRNA/blob/main/Downstream/DESeq.R))
+Using DESeq2 (v1.30.1) ([script](https://github.com/mch246/autogenous-vs-anautogenous-miRNA-expression/blob/main/Downstream/DEseq2_miRNAs.R))
 
-As a result of performing differential expression analysis on our miRNAs, we obtained no differentially abundant miRNAs.
+As a result of performing differential expression analysis on our miRNAs, we identified 22 differentially expressed miRNAs with an absolute log2 fold change > 0.58 and an adjusted p-value < 0.05.
+
+### Target Prediction
+
+
